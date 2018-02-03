@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'location', 'health'
     ];
 
     /**
@@ -26,4 +26,30 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function changeLocation($location){
+        $this->location = $location;
+        $this->save();
+    }
+
+    public function damage($damage){
+        $this->health = ($damage > $this->health) ? 0 : $this->health - $damage;
+        $this->save();
+    }
+
+    public function revive($revive){
+        $this->health = (($this->health + $revive) > 100) ? 100 : $this->health + $revive;
+        $this->save();
+    }
+
+    public function isDead(){
+        return $this->health == 0;
+    }
+
+    public function reset(){
+        $this->location = 'start';
+        $this->health = 100;
+
+        $this->save();
+    }
 }
