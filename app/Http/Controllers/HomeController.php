@@ -30,4 +30,18 @@ class HomeController extends Controller
     public function start(){
         return view('game.start');
     }
+
+    public function dead(Request $request){
+        $user = $request->user();
+        $user->location = 'dead';
+        $user->save();
+
+        return view('game.dead');
+    }
+
+    public function reset(Request $request){
+        $user = $request->user();
+        $user->reset();
+        return redirect()->route('home');
+    }
 }

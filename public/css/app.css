@@ -7377,9 +7377,9 @@ button.close {
 
 .modal-content {
   position: relative;
-  background-color: #fff;
+  background-color: #666;
   border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #999999;
   border-radius: 6px;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
@@ -8356,5 +8356,20 @@ ul .dropdown-menu {
 
 ul .dropdown-menu a:hover {
   background-color: #555;
+}
+
+.eat {
+  cursor: pointer;
+  color: greenyellow;
+}
+
+.action {
+  cursor: pointer;
+}
+
+.action .panel.panel-default {
+  background-color: #f4a460;
+  padding: 5px;
+  text-align: center;
 }
 

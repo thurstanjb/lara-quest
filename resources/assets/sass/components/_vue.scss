@@ -1,0 +1,13 @@
+.eat{
+  cursor: pointer;
+  color: greenyellow;
+}
+
+.action{
+  cursor:pointer;
+  .panel.panel-default{
+    background-color: $brand-primary;
+    padding: 5px;
+    text-align: center;
+  }
+}

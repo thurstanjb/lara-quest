@@ -55,7 +55,7 @@ class User extends Authenticatable
     public function inventory(){
         return $this->belongsToMany(Item::class, 'inventories')
             ->using(Inventory::class)
-            ->withPivot('quantity');
+            ->withPivot(['id', 'quantity']);
     }
 
     public function inventoryCount(Item $item){
@@ -68,6 +68,21 @@ class User extends Authenticatable
            return $item;
         });
         return $addCount->unique('slug');
+    }
+
+    public function eatItem($data){
+        $item = Item::whereId($data['item_id'])->first();
+        $this->revive($item->life);
+        $this->useItem($data);
+    }
+
+    public function useItem($data){
+        Inventory::find($data['pivot_id'])->delete();
+    }
+
+    public function addItem($data){
+        $item = Item::whereSlug($data['slug'])->first();
+        $this->inventory()->attach($item);
     }
 
     public function changeLocation($location){
@@ -92,6 +107,9 @@ class User extends Authenticatable
     public function reset(){
         $this->location = 'start';
         $this->health = 100;
+        foreach($this->inventory as $item){
+            $this->inventory()->detach($item);
+        }
 
         $this->save();
     }

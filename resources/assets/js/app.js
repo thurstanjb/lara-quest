@@ -20,6 +20,8 @@ window.events = new Vue();
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('health-bar', require('./components/HealthBar.vue'));
 Vue.component('inventory', require('./components/Inventory.vue'));
+Vue.component('action', require('./components/Action.vue'));
+
 
 
 const app = new Vue({

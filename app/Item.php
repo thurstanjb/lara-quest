@@ -37,7 +37,7 @@ class Item extends Model
     public function users(){
         return $this->belongsToMany(User::class, 'inventories')
             ->using(Inventory::class)
-            ->withPivot('quantity');
+            ->withPivot('quantity', 'id');
     }
 
 

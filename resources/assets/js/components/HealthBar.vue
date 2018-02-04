@@ -25,6 +25,13 @@
                 return 'width: ' + this.health + '%';
             }
         },
+
+        created(){
+            window.events.$on('update_health', health => {
+                this.health = health;
+            })
+        },
+
         data(){
             return{
                 health: this.userHealth
