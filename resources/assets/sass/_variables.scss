@@ -27,6 +27,7 @@ $text-color: #e3e3e3;
 $navbar-default-bg: #555;
 $navbar-default-color: $text-color;
 $navbar-default-link-color: $text-color;
+$navbar-default-link-active-color: $text-color;
 $component-active-color: lighten($body-bg, 20%);
 
 // Buttons
@@ -44,3 +45,6 @@ $panel-bg: $body-bg;
 // Forms
 $input-bg: lighten($body-bg, 10%);
 $input-border: lighten($body-bg, 20%);
+
+// Lists
+$list-group-bg: $body-bg;

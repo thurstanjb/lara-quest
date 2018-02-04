@@ -16,20 +16,23 @@ class ItemSeeder extends Seeder
             'name' => 'Key',
             'slug' => 'key',
             'life' => 1,
+            'type' => 'tool'
             ]);
         DB::table('items')
             ->insert([
                 'name' => 'Pipe',
                 'slug' => 'pipe',
                 'life' => 50,
-                'single_use' => false
+                'single_use' => false,
+                'type' => 'weapon'
             ]);
         DB::table('items')
             ->insert([
                 'name' => 'Apple',
                 'slug' => 'apple',
                 'life' => 50,
-                'single_use' => true
+                'single_use' => true,
+                'type' => 'food'
             ]);
     }
 }

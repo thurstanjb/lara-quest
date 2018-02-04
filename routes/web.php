@@ -11,10 +11,20 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function(){
+
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/start', 'HomeController@start')->name('start');
+
+    Route::prefix('test')->name('test.')->group(function(){
+       Route::get('make-inventory', 'TestController@makeInventory')->name('make-inventory');
+       Route::get('clear-inventory', 'TEstController@clearInventory')->name('clear-inventory');
+    });
+});
+

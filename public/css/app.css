@@ -5719,7 +5719,7 @@ tbody.collapse.in {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555;
+  color: #e3e3e3;
   background-color: #444444;
 }
 
@@ -5752,7 +5752,7 @@ tbody.collapse.in {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   background-color: #444444;
-  color: #555;
+  color: #e3e3e3;
 }
 
 @media (max-width: 767px) {
@@ -5769,7 +5769,7 @@ tbody.collapse.in {
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #555;
+    color: #e3e3e3;
     background-color: #444444;
   }
 
@@ -6595,7 +6595,7 @@ a.thumbnail.active {
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
-  background-color: #fff;
+  background-color: #666;
   border: 1px solid #999999;
 }
 
@@ -8348,5 +8348,13 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+ul .dropdown-menu {
+  background-color: #666;
+}
+
+ul .dropdown-menu a:hover {
+  background-color: #555;
 }
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Item;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -68,14 +69,5 @@ class UserTest extends TestCase
         $this->user->damage(100);
 
         $this->assertTrue($this->user->isDead());
-    }
-
-    /** @test */
-    public function _a_user_can_be_reset(){
-        $this->user->reset();
-
-        $this->assertEquals('start', $this->user->location);
-        $this->assertEquals(100, $this->user->health);
-        $this->assertFalse($this->user->isDead());
     }
 }

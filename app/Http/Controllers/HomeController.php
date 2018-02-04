@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $location = auth()->user()->location;
+        return redirect()->route($location);
+    }
+
+    public function start(){
+        return view('game.start');
     }
 }

@@ -9,6 +9,7 @@ $factory->define(Item::class, function (Faker $faker) {
         'name' => $name ?: $name = $faker->word,
         'slug' => str_slug($name),
         'life' => 1,
+        'type' => 'food',
         'single_use' => true
     ];
 });

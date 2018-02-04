@@ -1,0 +1,8 @@
+ul{
+  .dropdown-menu{
+    background-color: $body-bg;
+    a:hover{
+      background-color: $navbar-default-bg;
+    }
+  }
+}

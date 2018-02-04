@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->unsignedInteger('life');
+            $table->string('type');
             $table->boolean('single_use')->default(true);
             $table->timestamps();
         });
