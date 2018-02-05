@@ -73,6 +73,16 @@
 
         @yield('content')
     </div>
+    <div class="game-footer col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Made for <a href="https://larahack.com" target="_blank">LaraHack</a> 2018
+                <span class="pull-right">
+                    By <a href="https://twitter.com/ThurstanBowling" target="_blank">Thurstan Bowling</a>
+                </span>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

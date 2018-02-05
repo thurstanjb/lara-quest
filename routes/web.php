@@ -36,7 +36,9 @@ Route::middleware('auth')->group(function(){
         Route::get('bedroom', 'OldHouseController@bedroom')->name('bedroom');
         Route::get('bathroom', 'OldHouseController@bathroom')->name('bathroom');
         Route::get('small-bedroom', 'OldHouseController@small_bedroom')->name('small_bedroom');
-
+        Route::get('kitchen', 'OldHouseController@kitchen')->name('kitchen');
+        Route::get('hallway', 'OldHouseController@hallway')->name('hallway');
+        Route::get('garden', 'OldHouseController@garden')->name('garden');
 
 
     });
@@ -47,12 +49,12 @@ Route::middleware('auth')->group(function(){
         Route::post('damage', 'ApiController@damage')->name('damage');
         Route::post('use', 'ApiController@use')->name('use');
         Route::get('inventory', 'ApiController@inventory')->name('inventory');
-
+        Route::get('health', 'ApiController@halth')->name('health');
     });
 
-    Route::prefix('test')->name('test.')->group(function(){
-        Route::get('make-inventory', 'TestController@makeInventory')->name('make-inventory');
-        Route::get('clear-inventory', 'TestController@clearInventory')->name('clear-inventory');
-    });
+//    Route::prefix('test')->name('test.')->group(function(){
+//        Route::get('make-inventory', 'TestController@makeInventory')->name('make-inventory');
+//        Route::get('clear-inventory', 'TestController@clearInventory')->name('clear-inventory');
+//    });
 });
 

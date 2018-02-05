@@ -30,6 +30,15 @@
                             modal-message="You go back into the corridor"
                     >
                     </action>
+                    <action
+                            message-data="Investigate the cupboard"
+                            needed-item="small key"
+                            pickup-data="front door key"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="cupboard"
+                            modal-message="Its a bit of a sruggle but you manage to get the cupboard open. You find what looks like a front door key!"
+                            >
+                    </action>
                 </div>
 
             </div>

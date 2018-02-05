@@ -43575,6 +43575,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.checkInventory();
         this.checkItem();
     },
+    created: function created() {
+        var _this = this;
+
+        window.events.$on('update_inventory', function (inventory) {
+            _this.inventory = inventory;
+            _this.modal_message = _this.modalMessage;
+            _this.url = _this.urlData;
+            _this.checkInventory();
+            _this.checkItem();
+        });
+    },
 
 
     methods: {
@@ -43583,51 +43594,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             $('#' + this.modal).modal('show');
         },
         checkInventory: function checkInventory() {
-            var _this = this;
+            var _this2 = this;
 
             if (this.pickup !== 'null') {
                 this.inventory.filter(function (elem) {
-                    if (elem.slug === _this.pickup && (_this.found_item || elem.single_use)) {
-                        _this.can_pickup = false;
-                        _this.modal_message = 'you found nothing.';
+                    if (elem.slug === _this2.pickup && (_this2.found_item || elem.single_use)) {
+                        _this2.can_pickup = false;
+                        _this2.modal_message = 'you found nothing.';
                     }
                 });
             }
         },
         checkItem: function checkItem() {
-            var _this2 = this;
+            var _this3 = this;
 
             if (this.item_needed !== 'null') {
                 this.can_use = false;
                 this.inventory.filter(function (elem) {
-                    if (elem.slug === _this2.item_needed) {
-                        _this2.can_use = true;
-                        _this2.using_item = elem;
+                    if (elem.slug === _this3.item_needed) {
+                        _this3.can_use = true;
+                        _this3.using_item = elem;
                     }
                 });
                 if (!this.can_use) {
                     this.url = 'null';
-                    this.modal_message = 'You need a' + this.item_needed;
+                    this.modal_message = 'You need a ' + this.item_needed;
                 }
             }
         },
         process: function process() {
-            if (this.can_pickup && this.pickup !== 'null' && !this.found_item) {
+            if (this.can_pickup && this.pickup !== 'null' && !this.found_item && this.can_use) {
                 this.addItem(this.pickup);
             }
             if (this.can_use && this.item_needed !== 'null') {
                 this.useItem(this.using_item);
             }
-            if (this.url !== 'null') {
+            if (this.url !== 'null' && this.pickup && this.can_use) {
                 this.changeUrl(this.url);
             }
-            if (this.damage !== 'null') {
+            if (this.damage !== 'null' && this.pickup && this.can_use) {
                 this.damaged(this.damage);
             }
             $('#' + this.modal).modal('hide');
         },
         addItem: function addItem(slug) {
-            var _this3 = this;
+            var _this4 = this;
 
             var data = {
                 slug: slug
@@ -43635,28 +43646,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.found_item = true;
             window.axios.post('/api/pickup', data).then(function (response) {
                 console.log(response.data.inventory);
-                _this3.inventory = response.data.inventory;
+                _this4.inventory = response.data.inventory;
                 window.events.$emit('update_inventory', response.data.inventory);
-                _this3.checkInventory();
+                _this4.checkInventory();
             }).catch(function (response) {
                 console.error(response);
             });
         },
         useItem: function useItem(item) {
-            var _this4 = this;
+            var _this5 = this;
 
             var data = {
+                item_id: item.id,
                 pivot_id: item.pivot.id
             };
             window.axios.post('/api/use', data).then(function (response) {
-                _this4.inventory = response.data.inventory;
+                _this5.inventory = response.data.inventory;
                 window.events.$emit('update_inventory', response.data.inventory);
             }).catch(function (response) {
                 console.error(response);
             });
         },
         damaged: function damaged(damage) {
-            var _this5 = this;
+            var _this6 = this;
 
             var data = {
                 damage: damage
@@ -43664,12 +43676,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             window.axios.post('/api/damage', data).then(function (response) {
                 window.events.$emit('update_health', response.data.health);
                 if (response.data.dead !== undefined) {
-                    _this5.changeUrl(response.data.dead);
+                    _this6.changeUrl(response.data.dead);
                 }
             });
         },
         changeUrl: function changeUrl(url) {
-            window.location = url;
+            setTimeout(function () {
+                window.location = url;
+            }, 500);
         }
     }
 });

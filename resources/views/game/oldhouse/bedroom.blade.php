@@ -15,14 +15,40 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Actions</div>
                 <div class="panel-body">
-                    {{--<action--}}
-                            {{--message-data="Check out the left door"--}}
-                            {{--url-data="{{route('oldhouse.bedroom')}}"--}}
-                            {{--:user-inventory="{{$user->inventoryList()}}"--}}
-                            {{--modal-id="left_door"--}}
-                            {{--modal-message="The door is a bt stiff, but it lets you in"--}}
-                    {{-->--}}
-                    {{--</action>--}}
+                    <action
+                            message-data="Whats in the wardrobe"
+                            take-damage="95"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="wardrobe"
+                            modal-message="AGGHHGGHHH! You get attacked by a mutant rat! You sustain severe damage before you can kick it back into the
+                            wardrobe and slam the door shut."
+                    >
+                    </action>
+                    <action
+                            message-data="Examine the corpse"
+                            pickup-data="small key"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="corpse"
+                            modal-message="After gagging on the putrid stench, you discover a small key in a trouser pocket."
+                    >
+                    </action>
+                    <action
+                            message-data="Look in the boxes"
+                            take-damage="80"
+                            url-data="{{route('oldhouse.kitchen')}}"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="boxes"
+                            modal-message="As you walk across the rug on the floor, it gives way and you fall through!"
+                    >
+                    </action>
+                    <action
+                            message-data="Leave the room"
+                            url-data="{{route('oldhouse.corridor')}}"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="leave"
+                            modal-message="You open the door and go back into the corridor"
+                    >
+                    </action>
                 </div>
 
             </div>

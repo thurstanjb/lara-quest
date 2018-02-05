@@ -82,6 +82,17 @@
           this.checkItem();
         },
 
+        created(){
+            window.events.$on('update_inventory', inventory => {
+                this.inventory = inventory;
+                this.modal_message = this.modalMessage;
+                this.url = this.urlData;
+                this.checkInventory();
+                this.checkItem();
+
+            })
+        },
+
         methods: {
             openModal(){
                 console.log('Opening Modal');
@@ -109,22 +120,22 @@
                     });
                     if(!this.can_use){
                         this.url = 'null';
-                        this.modal_message = 'You need a' + this.item_needed
+                        this.modal_message = 'You need a ' + this.item_needed
                     }
                 }
             },
 
             process(){
-                if(this.can_pickup && this.pickup !== 'null' && !this.found_item){
+                if(this.can_pickup && this.pickup !== 'null' && !this.found_item && this.can_use){
                     this.addItem(this.pickup);
                 }
                 if(this.can_use && this.item_needed !== 'null'){
                     this.useItem(this.using_item);
                 }
-                if(this.url !== 'null'){
+                if(this.url !== 'null' && this.pickup && this.can_use){
                     this.changeUrl(this.url);
                 }
-                if(this.damage !== 'null'){
+                if(this.damage !== 'null' && this.pickup && this.can_use){
                     this.damaged(this.damage);
                 }
                 $('#' + this.modal).modal('hide');
@@ -149,6 +160,7 @@
 
             useItem(item){
               let data = {
+                  item_id: item.id,
                   pivot_id: item.pivot.id
               };
               window.axios.post('/api/use', data)
@@ -175,7 +187,9 @@
             },
 
             changeUrl(url){
-                window.location = url;
+                setTimeout(() => {
+                    window.location = url;
+                }, 500);
             }
         }
     }

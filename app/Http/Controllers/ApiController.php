@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -34,7 +35,10 @@ class ApiController extends Controller
 
     public function use(Request $request){
         $user = $request->user();
-        $user->useItem($request->all());
+        $item = Item::find($request->get('item_id'))->first();
+        if(!$item->single_use){
+            $user->useItem($request->all());
+        }
         $inventory = $user->fresh()->inventoryList()->toArray();
 
         return compact('inventory');

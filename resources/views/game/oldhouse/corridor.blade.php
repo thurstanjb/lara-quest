@@ -40,6 +40,14 @@
                             modal-message="The door opens."
                     >
                     </action>
+                    <action
+                            message-data="Go down the stairs"
+                            url-data="{{route('oldhouse.hallway')}}"
+                            :user-inventory="{{$user->inventoryList()}}"
+                            modal-id="stairs"
+                            modal-message="You descend down the creaking stairs"
+                    >
+                    </action>
                 </div>
 
             </div>

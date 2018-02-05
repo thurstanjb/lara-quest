@@ -9,7 +9,7 @@ class OldHouseController extends Controller
 
     public function corridor(Request $request){
         $user = $request->user();
-        if($this->checkLocation($user, ['start', 'oldhouse.bedroom', 'oldhouse.bathroom', 'oldhouse.small_bedroom', 'oldhouse.corridor'])){
+        if($this->checkLocation($user, ['start', 'oldhouse.bedroom', 'oldhouse.bathroom', 'oldhouse.small_bedroom', 'oldhouse.corridor', 'oldhouse.hallway'])){
             $user->location = 'oldhouse.corridor';
             $user->save();
 
@@ -50,6 +50,43 @@ class OldHouseController extends Controller
             $user->save();
 
             return view('game.start');
+        }
+
+        return redirect()->route('home');
+    }
+
+    public function kitchen(Request $request){
+        $user = $request->user();
+        if($this->checkLocation($user, ['oldhouse.kitchen', 'oldhouse.bedroom', 'oldhouse.hallway'])){
+            $user->location = 'oldhouse.kitchen';
+            $user->save();
+
+            return view('game.oldhouse.kitchen');
+        }
+
+        return redirect()->route('home');
+    }
+
+    public function hallway(Request $request){
+        $user = $request->user();
+        if($this->checkLocation($user, ['oldhouse.kitchen', 'oldhouse.hallway', 'oldhouse.corridor'])){
+            $user->location = 'oldhouse.hallway';
+            $user->save();
+
+            return view('game.oldhouse.hallway');
+        }
+
+        return redirect()->route('home');
+    }
+
+    public function garden(Request $request){
+        $user = $request->user();
+        if($this->checkLocation($user, ['oldhouse.kitchen', 'oldhouse.hallway', 'oldhouse.garden'])){
+            $user->location = 'oldhouse.garden';
+            $user->save();
+
+//            return view('game.oldhouse.garden');
+            return view('game.fin');
         }
 
         return redirect()->route('home');

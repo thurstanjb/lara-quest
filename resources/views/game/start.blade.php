@@ -7,7 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Location:</b> Small Bedroom</div>
                 <div class="panel-body">
-                    <p>You awake...</p>
+                    @if($user->location == 'start')
+                        <p>You awake...</p>
+                    @endif
                     <p>You are in a darkened room with a sliver of light filtering through a high window. The room has a door, a chest of drawers and
                         a filthy looking mattress on the floor.</p>
                 </div>
